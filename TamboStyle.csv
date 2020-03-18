@@ -1,0 +1,69 @@
+CATEGORY : LIFE STYLE ;;;;;;;;;;;
+;;;;;;;;;;;
+NO;PARAMETER ;Project 1;Project 2;Project 3;Project 4;Project 5;Project 6;Project 7;Project 8;Project 9;Project 10
+1;Ada Prototype?  (Prototype: fase sampel, contoh produk dalam skala kecil) ;1;0;0;0;1;0;0;0;1;0
+2;Diterima di Pasar? (Market fit: fase produk sudah diterima oleh pasar) ;0;1;0;1;0;1;0;1;0;1
+3;Pengembangan Pasar? (Scale up: fase peningkatan kapasitas/volume produk/skala bisnis);0;0;1;0;0;0;1;0;0;0
+4;Market size > 0;1;1;1;1;1;1;1;1;1;1
+5;Sentiment analysis;1;1;1;1;1;1;1;1;1;1
+6;IRR score  0 atau lebih dari 0 ;1;1;1;1;1;1;1;1;1;1
+7;NPV > 0;1;1;1;1;1;1;1;1;1;1
+8;Payback period ;1;1;1;1;1;1;1;1;1;1
+9;Profitable;1;1;1;1;1;1;1;1;1;1
+10;Cashflow;1;0;1;0;1;0;1;0;1;0
+11;Pertumbuhan Laba;1;0;1;0;1;0;1;0;1;0
+12;Acid-test ratio;1;1;1;1;1;1;1;1;1;1
+13;Runway (months);1;1;1;1;1;1;1;1;1;1
+14;Tidak dalam keadaan bangkrut;1;1;1;1;1;1;1;1;1;1
+15;Tidak terkena masalah hukum;1;1;1;1;1;1;1;1;1;1
+16;Tidak pernah masuk penjara;1;1;1;1;1;1;1;1;1;1
+17;BI checking;0;0;0;0;0;0;0;0;0;0
+18;Dokumen KTP;1;1;1;1;1;1;1;1;1;1
+19;Dokumen SKCK;1;1;1;1;1;1;1;1;1;1
+20;Tidak membahayakan keselamatan manusia;1;1;1;1;1;1;1;1;1;1
+21;Tidak mengandung / menyebarkan zat beracun;1;1;1;1;1;1;1;1;1;1
+22;Tidak mengandung / menyebarkan virus?;1;1;1;1;1;1;1;1;1;1
+23;Tidak melanggar hak asasi manusia?;1;1;1;1;1;1;1;1;1;1
+24;Tidak melanggar hak cipta?;1;1;1;1;1;1;1;1;1;1
+25;Tidak melanggar kode etik?;1;1;1;1;1;1;1;1;1;1
+26;Tidak melanggar SARA ;1;1;1;1;1;1;1;1;1;1
+27;Tidak mengandung unsur pornografi ;1;1;1;1;1;1;1;1;1;1
+28;Apakah bersifat menghibur? ;1;1;1;1;1;1;1;1;1;1
+29;Apakah menambah pengetahuan? ;1;1;1;1;1;1;1;1;1;1
+30;Apakah produk merupakan produk pertama (baru/fresh) di industri?;1;0;1;0;1;0;1;0;1;0
+31;Apakah produk memiliki keunikan (uniqueness)?;1;0;1;0;1;0;1;0;1;0
+32;Apakah sudah memiliki ISO? ;1;0;1;0;1;0;1;0;1;0
+33;Apakah produk sudah melalui riset sebelumnya? ;1;0;1;0;1;0;1;0;1;0
+34;Apakah pernah mempublikasikan karya?;1;1;1;1;1;1;1;1;1;1
+35;Apakah pernah dimuat di media (Online/ Offline);1;1;1;1;1;1;1;1;1;1
+36;Apakah karya pernah terindeks di Google? ;1;1;1;1;1;1;1;1;1;1
+37;Apakah pencipta pernah terindeks di Google? ;1;1;1;1;1;1;1;1;1;1
+38;Apakah mempunyai website/ blog?;1;0;1;0;1;0;1;0;1;0
+39;Apakah mempunyai Social Media?  ;1;0;1;0;1;0;1;0;1;0
+40;Memiliki pengguna;1;1;1;1;1;1;1;1;1;1
+41;Jumlah pengguna (user amount);1;1;1;1;1;1;1;1;1;1
+42;Mudah digunakan (user friendly);1;1;1;1;1;1;1;1;1;1
+43;Ergonomis (Apakah desain produk mendukung fungsi produk);1;0;1;0;1;0;1;0;1;0
+44;Apakah desain kemasan mendukung fungsi produk? ;0;1;0;1;0;1;0;1;0;1
+45;Apakah produk/ karya memberikan dampak positif pada Perempuan? ;1;1;1;1;1;1;1;1;1;1
+46;Apakah produk/ karya memberikan dampak positif pada Anak-anak (1-12th)? ;1;1;1;1;1;1;1;1;1;1
+47;Apakah produk/ karya memberikan dampak positif pada Generasi Muda (13-25th)? ;1;1;1;1;1;1;1;1;1;1
+48;Apakah produk/ karya memberikan dampak positif pada Manula (diatas 60th)? ;1;1;1;1;1;1;1;1;1;1
+49;Apakah produk/ karya memberikan dampak positif pada Difabel? ;1;0;1;0;1;0;1;0;1;0
+50;Tanpa kemiskinan  ;1;0;0;0;0;0;0;0;0;0
+51;Tanpa kelaparan;0;1;0;0;0;0;0;0;0;0
+52;Kehidupan  sehat dan sejahtera;0;0;1;0;0;0;0;0;0;0
+53;Pendidikan berkualitas ;0;0;0;1;0;0;0;0;0;0
+54;Kesetaraan gender ;0;0;0;0;1;0;0;0;0;0
+55;Air bersih dan sanitasi layak ;0;0;0;0;0;1;0;0;0;0
+56;Energi bersih dan terjangkau ;0;0;0;0;0;0;1;0;0;0
+57;Pekerjaan layak dan pertumbuhan ekonomi ;0;0;0;0;0;0;0;1;0;0
+58;Industri Inovasi dan Infrastruktur;0;0;0;0;0;0;0;0;1;0
+59;Berkurangnya kesenjangan ;0;0;0;0;0;0;0;0;0;1
+60;Kota dan pemukiman yang berkelanjutan ;0;0;0;0;0;0;0;0;0;1
+61;Konsumsi dan produksi yang bertanggungjawab;0;0;0;0;0;0;0;0;1;0
+62;Penanganan Perubahan iklim ;0;0;0;0;0;0;0;1;0;0
+63;Ekosistem Lautan;0;0;0;0;0;0;1;0;0;0
+64;Ekosistem Daratan;0;0;0;0;0;1;0;0;0;0
+65;Perdamaian, Keadilan dan kelembagaan yang Tangguh ;0;0;0;0;1;0;0;0;0;0
+66;Kemitraan untuk mencapai tujuan ;0;0;0;1;0;0;0;0;0;0

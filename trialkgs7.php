@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin:*');
 
 $test=array_map('str_getcsv', file('TamboStyle.csv'));
 if(strlen($test[6][0])==1){
-	$csv=$test;
+	$csv=$_POST['data'];
 }
 else{
 	$csv = array_map(function($v){return str_getcsv($v, ";");}, file('TamboStyle.csv'));
