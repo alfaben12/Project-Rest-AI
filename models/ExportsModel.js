@@ -1,5 +1,5 @@
-const Branch = require('./BranchModel');
+const KeyBiner = require('./KeyBinerModel');
 
 module.exports = {
-    Branch: Branch
+    KeyBiner: KeyBiner
 };

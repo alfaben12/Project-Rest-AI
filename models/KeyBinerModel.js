@@ -4,18 +4,22 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'branch',
+    'key_biner',
     {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
+        parameter: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
         name: {
             type: Sequelize.STRING(255),
             allowNull: false
         },
-        desc: {
+        biner: {
             type: Sequelize.TEXT,
             allowNull: false
         },

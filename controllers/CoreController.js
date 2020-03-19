@@ -2,6 +2,8 @@ const excelToJson = require('convert-excel-to-json');
 const fs = require('fs');
 const neatCsv = require('neat-csv');
 const axios = require('axios');
+const { v4: uuidv4 } = require('uuid');
+const ExportsModel = require('../models/ExportsModel');
 
 module.exports = {
 	read: async (req, res) => {
@@ -30,8 +32,8 @@ module.exports = {
 			})
 		}else{
 			code = 200
-		let filepath = process.cwd()+ '/files/csv/'+ req.file.filename
-		fs.readFile(filepath, async (err, data) => {
+			let filepath = process.cwd()+ '/files/csv/'+ req.file.filename
+			fs.readFile(filepath, async (err, data) => {
 				if (err) {
 					console.error(err)
 					return
@@ -58,6 +60,18 @@ module.exports = {
 						restructured_all.push(row)
 					}
 					
+					let data_insert = []
+					for (let i = 0; i < restructured_all.length; i++) {
+						let row_biner = restructured_all[i].slice(2)
+						
+						let single_data = {
+							name: restructured_all[i][1],
+							biner: row_biner.toString(),
+						}
+						
+						data_insert.push(single_data)
+					}
+					
 					let restructured_biner = []
 					for (let i = 0; i < data.length; i++) { // change i = 1 (fix same like a core php result)
 						let row = data[i].split(";")
@@ -66,13 +80,17 @@ module.exports = {
 					}
 					
 					let array_biner = restructured_biner, restructured_biner_sum = array_biner.reduce((r, a) => a.map((b, i) => parseInt((r[i] || 0)) + parseInt(b)), []);
+					
+					await ExportsModel.KeyBiner.bulkCreate(data_insert)
+					
 					return res.status(code).json({
-							all: restructured_all,
-							biner: restructured_biner,
-							sum: restructured_biner_sum
-						})
-					}
-				})
-			}
+						parameter: uuidv4(),
+						all: restructured_all,
+						biner: data_insert,
+						sum: restructured_biner_sum
+					})
+				}
+			})
 		}
 	}
+}
