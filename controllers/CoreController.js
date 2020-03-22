@@ -42,6 +42,7 @@ module.exports = {
 				if(result[5][0] == 1){
 					let data = result
 				}else{
+					let parameter = uuidv4()
 					let data = []
 					for (let i = 0; i < result.length; i++) {
 						let string = result[i][0]
@@ -65,6 +66,7 @@ module.exports = {
 						let row_biner = restructured_all[i].slice(2)
 						
 						let single_data = {
+							parameter: parameter,
 							name: restructured_all[i][1],
 							biner: row_biner.toString(),
 						}
@@ -82,15 +84,105 @@ module.exports = {
 					let array_biner = restructured_biner, restructured_biner_sum = array_biner.reduce((r, a) => a.map((b, i) => parseInt((r[i] || 0)) + parseInt(b)), []);
 					
 					await ExportsModel.KeyBiner.bulkCreate(data_insert)
+					await ExportsModel.SumBiner.create({
+						parameter: parameter,
+						sum: restructured_biner_sum.toString()
+					})
 					
 					return res.status(code).json({
-						parameter: uuidv4(),
-						all: restructured_all,
-						biner: data_insert,
-						sum: restructured_biner_sum
+						parameter: parameter
 					})
 				}
 			})
 		}
+	},
+	
+	readMultipleCSV: async (req, res) => {
+		let result = []
+		let code = 200
+		code = 200
+		let files = req.files
+		if(files.length == 0){
+			return res.status(400).json('File tidak di temukan!')
+		}
+		let parameter = []
+		for (let a = 0; a < files.length; a++) {
+			let path = files[a].path
+			let filepath = process.cwd()+ '/' + path
+			let parameter_temp = uuidv4()
+			fs.readFile(filepath, async (err, dataCsv) => {
+				if (err) {
+					console.error(err)
+					return
+				}
+				let data = []
+				
+				result = await neatCsv(dataCsv)
+				for (let i = 0; i < result.length; i++) {
+					let string = result[i][0]
+					if(Object.keys(result[i]).length > 0){
+						for (let j = 1; j < Object.keys(result[i]).length; j++) {
+							string += result[i][j]
+						}
+					}
+					data.push(string)
+					data = data.filter(function(el) { return el; }); // remove null value array
+				}
+				
+				let restructured_all = []
+				for (let i = 0; i < data.length; i++) {
+					let row = data[i].split(";")
+					restructured_all.push(row)
+				}
+				
+				let restructured_biner = []
+				for (let i = 0; i < data.length; i++) { // change i = 1 (fix same like a core php result)
+					let row = data[i].split(";")
+					let row_biner = row.slice(2)
+					restructured_biner.push(row_biner)
+				}
+				
+				let array_biner = restructured_biner, restructured_biner_sum = array_biner.reduce((r, a) => a.map((b, i) => parseInt((r[i] || 0)) + parseInt(b)), []);
+				
+				for (let i = 0; i < restructured_all.length; i++) {
+					let row_biner = restructured_all[i].slice(2)
+					ExportsModel.KeyBiner.create({
+						parameter: parameter_temp,
+						name: restructured_all[i][1],
+						biner: row_biner.toString(),
+					})
+				}
+				
+				ExportsModel.SumBiner.create({
+					parameter: parameter_temp,
+					sum: restructured_biner_sum.toString()
+				})
+			})
+			parameter.push(parameter_temp)
+		}
+		
+		return res.json({
+			parameter: parameter
+		})
+	},
+	
+	getDataCsv: async (req, res) => {
+		let parameter = req.params.uuid.split(",")
+
+		ExportsModel.SumBiner.findAll({
+			where: {
+				parameter: parameter
+			},
+			include: {
+				attributes: {},
+				model: ExportsModel.KeyBiner,
+				required: true
+			}
+		}).then(function (data) {
+			return res.json(data);
+			
+		}).error(function (err) {
+			console.log("Error:" + err);
+		});
 	}
 }

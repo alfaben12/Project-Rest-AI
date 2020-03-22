@@ -40,6 +40,17 @@ var upload_csv = multer({
 	},
 })
 
+var storage_multiple_csv = multer.diskStorage({
+	destination: './files/csv/',
+	filename: function (req, file, cb) {
+		cb( null, Date.now('Y-m-d') +".csv" );
+	}
+});
+
+var upload_multiple_csv = multer({ 
+	storage: storage_multiple_csv
+})
+
 router.post(
 	'/excel',
 	upload_excel.single('excel'),
@@ -51,5 +62,16 @@ router.post(
 	upload_csv.single('csv'),
 	BranchController.readCSV
 );
-	
+
+router.post(
+	'/multiplecsv',
+	upload_multiple_csv.array('csv[]', 100),
+	BranchController.readMultipleCSV
+);
+
+router.get(
+	'/csv/:uuid',
+	BranchController.getDataCsv
+);
+
 module.exports = router;

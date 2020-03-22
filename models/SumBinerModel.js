@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'key_biner',
+    'sum_biner',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -20,11 +20,7 @@ const Model = sequelize.define(
             primaryKey: true,
             allowNull: false
         },
-        name: {
-            type: Sequelize.STRING(255),
-            allowNull: false
-        },
-        biner: {
+        sum: {
             type: Sequelize.TEXT,
             allowNull: false
         },
