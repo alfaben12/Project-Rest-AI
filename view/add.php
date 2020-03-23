@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="formData">
-        <input type="file" id="csv" required>
+        <input type="file" multiple="multiple" accept=".csv" id="csv" required>
         <br/>
         <button>Submit</button>
     </form>
@@ -16,10 +16,15 @@
 			$(document).ready(function () {
                 $("#formData").submit(function(event) {
                     var form_data = new FormData();
-                    form_data.append('csv', $("#csv").prop('files')[0]);
+
+                    // Read selected files
+                    var totalfiles = document.getElementById('csv').files.length;
+                    for (var index = 0; index < totalfiles; index++) {
+                        form_data.append("csv[]", document.getElementById('csv').files[index]);
+                    }
 
                     $.ajax({
-                        url: "http://localhost:3002/cores/csv",
+                        url: "http://localhost:3002/cores/multiplecsv",
                         type: "POST",
                         dataType: "json",
                         data: form_data,
@@ -27,7 +32,7 @@
                         contentType: false,
                         processData: false,
                         success: function (response) {
-                            window.location = 'http://localhost:5001/edit.php?uuid='+ response.parameter
+                            window.location = 'http://localhost:5001/edit.php?uuid='+ response.parameter.toString()
                         }
                     });
                     event.preventDefault();
