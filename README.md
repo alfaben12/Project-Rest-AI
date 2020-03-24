@@ -1,6 +1,6 @@
 Project Rest AI
 
-##Installasi node.js
+## Instalasi node.js
 https://www.dumetschool.com/blog/cara-install-node-js-dan-npm-pada-windows
 
 ## How to run?
