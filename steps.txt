@@ -1,0 +1,10 @@
+1. Create dockerfile
+2. Fill dockerfile
+3. docker build -t project-pak-arwin .
+    - project-pak-arwin image name
+    - . current directory
+4. docker images //check images
+5. docker run -it -p 3002:3002 project-pak-arwin // create container
+    - 3002:3002 to expose dockerport:exposeport
+    - project-pak-arwin images name
+6. docker container ls --all //cek container
