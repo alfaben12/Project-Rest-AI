@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3002;
 const CoreRouter = require('./routes/CoreRouter');
+const ReportRouter = require('./routes/ReportRouter');
 
 // allow request
 app.use(cors());
@@ -27,5 +28,6 @@ app.get('/', function(req, res){
 });
 
 app.use('/cores', CoreRouter);
+app.use('/reports', ReportRouter);
 
 app.listen(port, () => console.log(`Example app listening on port ` + port));
