@@ -108,6 +108,9 @@ module.exports = {
 		let parameter = []
 		for (let a = 0; a < files.length; a++) {
 			let path = files[a].path
+			// let originalname = files[a].originalname
+			let filename = files[a].filename
+			
 			let filepath = process.cwd()+ '/' + path
 			let parameter_temp = uuidv4()
 			fs.readFile(filepath, async (err, dataCsv) => {
@@ -146,16 +149,21 @@ module.exports = {
 				
 				for (let i = 0; i < restructured_all.length; i++) {
 					let row_biner = restructured_all[i].slice(2)
-					ExportsModel.KeyBiner.create({
+					await ExportsModel.KeyBiner.create({ // await fix async bug
 						parameter: parameter_temp,
 						name: restructured_all[i][1],
 						biner: row_biner.toString(),
 					})
 				}
 				
-				ExportsModel.SumBiner.create({
+				await ExportsModel.SumBiner.create({
 					parameter: parameter_temp,
 					sum: restructured_biner_sum.toString()
+				})
+				
+				await ExportsModel.File.create({
+					parameter: parameter_temp,
+					name: filename
 				})
 			})
 			parameter.push(parameter_temp)
@@ -168,21 +176,60 @@ module.exports = {
 	
 	getDataCsv: async (req, res) => {
 		let parameter = req.params.uuid.split(",")
-
-		ExportsModel.SumBiner.findAll({
+		
+		ExportsModel.File.findAll({
 			where: {
 				parameter: parameter
 			},
-			include: {
+			include: [{
+				attributes: {},
+				model: ExportsModel.SumBiner,
+				required: true
+			},
+			{
 				attributes: {},
 				model: ExportsModel.KeyBiner,
 				required: true
-			}
+			}]
 		}).then(function (data) {
-			return res.json(data);
-			
+			if(data.length > 0){
+				return res.status(200).json(data);
+			}else{
+				return res.status(404).json(data);
+			}
 		}).error(function (err) {
 			console.log("Error:" + err);
 		});
+	},
+
+	update: async (req, res) => {
+		let key_biner = JSON.parse(req.body.key_biner)
+		let sum = JSON.parse(req.body.sum)
+
+		for (let i = 0; i < key_biner.length; i++) {
+			ExportsModel.KeyBiner.update({
+				name: key_biner[i].name,
+				biner: key_biner[i].biner
+			},{
+				where: {
+					id: key_biner[i].id
+				}
+			})
+		}
+
+		for (let i = 0; i < sum.length; i++) {
+			ExportsModel.SumBiner.update({
+				sum: sum[i].biner
+			},{
+				where: {
+					parameter: sum[i].parameter
+				}
+			})
+		}
+
+		return res.json({
+			key_biner: key_biner,
+			sum: sum
+		})
 	}
 }

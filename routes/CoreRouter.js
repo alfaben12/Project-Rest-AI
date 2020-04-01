@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path')
 const router = express.Router();
-const BranchController = require('../controllers/CoreController');
+const CoreController = require('../controllers/CoreController');
 var multer  = require('multer')
 
 var storage_excel = multer.diskStorage({
@@ -25,7 +25,7 @@ var upload_excel = multer({
 var storage_csv = multer.diskStorage({
 	destination: './files/csv/',
 	filename: function (req, file, cb) {
-		cb( null, Date.now('Y-m-d') +".csv" );
+		cb( null, file.originalname+"-"+ Date.now('Y-m-d') +".csv" );
 	}
 });
 
@@ -43,7 +43,7 @@ var upload_csv = multer({
 var storage_multiple_csv = multer.diskStorage({
 	destination: './files/csv/',
 	filename: function (req, file, cb) {
-		cb( null, Date.now('Y-m-d') +".csv" );
+		cb( null, file.originalname+"-"+ Date.now('Y-m-d') +".csv" );
 	}
 });
 
@@ -54,24 +54,29 @@ var upload_multiple_csv = multer({
 router.post(
 	'/excel',
 	upload_excel.single('excel'),
-	BranchController.read
+	CoreController.read
 );
 	
 router.post(
 	'/csv',
 	upload_csv.single('csv'),
-	BranchController.readCSV
+	CoreController.readCSV
 );
 
 router.post(
 	'/multiplecsv',
 	upload_multiple_csv.array('csv[]', 100),
-	BranchController.readMultipleCSV
+	CoreController.readMultipleCSV
 );
 
 router.get(
 	'/csv/:uuid',
-	BranchController.getDataCsv
+	CoreController.getDataCsv
+);
+
+router.put(
+	'/csv',
+	CoreController.update
 );
 
 module.exports = router;
