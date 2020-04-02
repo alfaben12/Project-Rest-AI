@@ -9,7 +9,6 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("Cores", () => {
-	
 	describe("GET /cores", () => {
 		// success
 		it("should get a single csv record", (done) => {
