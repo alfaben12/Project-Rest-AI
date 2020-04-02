@@ -37,8 +37,11 @@ module.exports = {
 				required: true
 			}]
 		}).then(function (data) {
-			return res.json(data);
-			
+			if(data.length > 0){
+				return res.status(200).json(data);
+			}else{
+				return res.status(404).json(data);
+			}
 		}).error(function (err) {
 			console.log("Error:" + err);
 		});
