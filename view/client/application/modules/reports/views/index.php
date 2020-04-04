@@ -8,6 +8,7 @@
             <table id="example" class="table table-hover" width="100%" data-toggle="datatable">
                 <thead>
                     <tr>
+                        <th width="5%">Multi</th>
                         <th width="5%">No</th>
                         <th>File</th>
                         <th width="10%">Total Row</th>
@@ -26,6 +27,20 @@
 <script>
     $(document).ready(function(){
         defaultReport()
+
+        $("#multiGraph").click(function(){
+            var params = [];
+            $("input[name='parameter']:checked").each(function() {
+                params.push($(this).val());
+            });
+
+            if(params.length > 0){
+                window.location = '<?= base_url() ?>reports/multigraph?uuid='+ params.toString()
+            }else{
+                alert('Silahkan check data yang ingin ditampilkan.')
+            }
+        })
+
         $("#formSearchReport").submit(function(event) {
             var endpoint = base_url + 'v1/sales/daterange';
             var start = $("#start").val()
@@ -52,6 +67,12 @@
                     for (let i = 0; i < response.length; i++) {
                         html += `
                         <tr>
+                            <td align="center">
+                                <div class="custom-control custom-checkbox my-3">
+                                    <input type="checkbox" name="parameter" class="custom-control-input" value="`+ response[i].parameter +`" id="customCheck1-`+ i +`">
+                                    <label class="custom-control-label" for="customCheck1-`+ i +`"></label>
+                                </div>
+                            </td>
                             <td align="center">`+ parseInt( i+1, 10) +`</td>
                             <td>`+ response[i].name.split("-")[0] +`</td>
                             <td>`+ response[i].key_biners.length +`</td>
@@ -109,6 +130,12 @@
                 for (let i = 0; i < response.length; i++) {
                     html += `
                     <tr>
+                        <td align="center">
+                            <div class="custom-control custom-checkbox my-3">
+                                <input type="checkbox" name="parameter" class="custom-control-input" value="`+ response[i].parameter +`" id="customCheck1-`+ i +`">
+                                <label class="custom-control-label" for="customCheck1-`+ i +`"></label>
+                            </div>
+                        </td>
                         <td align="center">`+ parseInt( i+1, 10) +`</td>
                         <td>`+ response[i].name.split("-")[0] +`</td>
                         <td>`+ response[i].key_biners.length +`</td>

@@ -6,14 +6,11 @@
             <div class="row no-gutters">
                 <div class="col-lg-12">
                     <ul class="nav nav-line" id="myTab3" role="tablist">
-
                     </ul>
-
                     <div class="tab-content p-3 pb-0" id="myTab3Value">
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -145,6 +142,7 @@
 						cache: false,
 						beforeSend: function() {},
 						success: function(response) {
+							alert('Data berhasil di update.')
 						},
 						error: function(response, textStatus, errorThrown) {
 							console.log('error')

@@ -111,10 +111,11 @@
 								<div class="row" style="padding-top:15px;">
 									<div>
                                 		<button type="button" class="btn btn-success" id="updateButton">Update</button>
+                                		<a href="<?= site_url('reports/multigraph?uuid='. $this->input->get('uuid')) ?>" class="btn btn-info">Graph</a>
                             		</div>
                             	</div>
                             </div>
-							<?php } ?>
+						<?php } ?>
 						<?php if($this->uri->segment(1) == 'reports' && $this->uri->segment(2) == '') { ?>
 							<div class="col-md-6">
 								<div class="row" style="padding-top:15px;">
@@ -137,6 +138,33 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-1">
+								<div class="row" style="padding-top:15px;">
+								</div>
+							</div>		
+							<div class="col-md-2">
+								<div class="row" style="padding-top:15px;">
+									<div id="linkToMultiGraph">
+										<button type="button" id="multiGraph" class="btn btn-success">Multi Graph</button>
+									</div>
+								</div>
+							</div>
+						<?php } ?>
+						<?php if($this->uri->segment(2) == 'multigraph') { ?>
+							<div class="col-md-7">
+								<div class="row" style="padding-top:15px;">
+								</div>
+							</div>		
+							<div class="col-md-2">
+								<div class="row" style="padding-top:15px;">
+									<div>
+										<div class="custom-control custom-switch my-3">
+                                            <input type="checkbox" class="custom-control-input" id="merge-chart">
+                                            <label class="custom-control-label" for="merge-chart">Gabungkan Grafik</label>
+                                        </div>
+                            		</div>
+                            	</div>
+                            </div>
 						<?php } ?>
 					</div>
 					<br/>

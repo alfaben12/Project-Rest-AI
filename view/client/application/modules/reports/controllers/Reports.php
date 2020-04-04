@@ -9,5 +9,9 @@ class Reports extends MX_Controller {
 	public function graph(){
 		$this->template->write_view('graph');
 	}
+
+	public function multigraph(){
+		$this->template->write_view('multigraph');
+	}
 }
 ?>
