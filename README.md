@@ -18,3 +18,6 @@ https://www.dumetschool.com/blog/cara-install-node-js-dan-npm-pada-windows
 <img src="https://i.ibb.co/WDcf6WG/Mailstones-1.png" alt="Mailstones-1" width="100%">
 
 [Link Milestone](https://time.graphics/line/357911)
+
+## Docs API
+[Dokumentasi API](https://documenter.getpostman.com/view/6671153/SzYbxcQw?version=latest)
