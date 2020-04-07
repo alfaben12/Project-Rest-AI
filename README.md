@@ -10,9 +10,7 @@ https://www.dumetschool.com/blog/cara-install-node-js-dan-npm-pada-windows
 4. jalankan command npm install
 5. jalankan command node index.js
 6. pindah folder /view ke htdocs
-7. buka add.php & edit.php
-8. cari http://localhost:5001 lalu ganti dengan http://localhost
-9. jalankan file add.php
+7. jalankan http://localhost/view
 
 ## Milestone
 <img src="https://i.ibb.co/WDcf6WG/Mailstones-1.png" alt="Mailstones-1" width="100%">
