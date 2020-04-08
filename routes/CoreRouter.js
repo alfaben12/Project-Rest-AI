@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path')
 const router = express.Router();
 const CoreController = require('../controllers/CoreController');
+const JWTMiddleware = require('../middlewares/JWTMiddleware');
 var multer  = require('multer')
 
 var storage_excel = multer.diskStorage({
@@ -59,23 +60,27 @@ router.post(
 	
 router.post(
 	'/csv',
+	JWTMiddleware.JWTverify,
 	upload_csv.single('csv'),
 	CoreController.readCSV
 );
 
 router.post(
 	'/multiplecsv',
+	JWTMiddleware.JWTverify,
 	upload_multiple_csv.array('csv[]', 100),
 	CoreController.readMultipleCSV
 );
 
 router.get(
 	'/csv/:uuid',
+	JWTMiddleware.JWTverify,
 	CoreController.getDataCsv
 );
 
 router.put(
 	'/csv',
+	JWTMiddleware.JWTverify,
 	CoreController.update
 );
 

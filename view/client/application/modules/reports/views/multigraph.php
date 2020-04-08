@@ -19,6 +19,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" id="mergeChartResult" style="display:none">
+            <div class="col-lg-12">
+                <div class="card card-box mb-5">
+                    <div class="card-body">
+                        <div class="row" id="mergeResult">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -48,6 +60,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="text-right">
+                                <table width="30%" border="1">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">Project</th>
+                                            <th width="10%">Nilai</th>
+                                            <th width="15%">Rekomendasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="chart-result-`+ h +`">
+                                    </tbody>
+                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>`;
@@ -58,20 +83,46 @@
                 for (let h = 0; h < response.length; h++) {
                     var sum_biner = response[h].sum_biner.sum.split(",")
                     let data = []
+                    let html = ''
                     for (let i = 0; i < sum_biner.length; i++) {
                         data.push({
                             "label": "Project "+ parseInt(i+1, 10),
                             "value": sum_biner[i]
                         });
+
+                        let recomendation
+
+                        if(sum_biner[i] > 0 && sum_biner[i] < 20){
+                            recomendation = 'Rekomendasi 1'
+                        }else if(sum_biner[i] > 20 && sum_biner[i] < 30){
+                            recomendation = 'Rekomendasi 2'
+                        }else if(sum_biner[i] > 30 && sum_biner[i] < 40){
+                            recomendation = 'Rekomendasi 3'
+                        }else if(sum_biner[i] > 40 && sum_biner[i] < 50){
+                            recomendation = 'Rekomendasi 4'
+                        }else if(sum_biner[i] > 50 && sum_biner[i] < 60){
+                            recomendation = 'Rekomendasi 5'
+                        }else{
+                            recomendation = 'Rekomendasi 6'
+                        }
+                        html += `
+                            <tr>
+                                <td>`+ parseInt(i+1, 10) +`</td>
+                                <td>`+ sum_biner[i] +`</td>
+                                <td>`+ recomendation +`</td>
+                            </tr>`
                     }
+                    $("#chart-result-"+h).html(html)
                     allData.push({
                         name: response[h].name.split("-")[0],
                         data: data
                     })
                 }
-
-                console.log(allData[0])
                 for (let h = 0; h < allData.length; h++) {
+                    let html = `
+                    
+                    `
+                    $("#chart-result-"+ h)
                     FusionCharts.ready(function () {
                         var visitChart = new FusionCharts({
                             type: 'line',
@@ -118,16 +169,51 @@
             success: function(response) {
                 let allData = []
                 let projectLongest = 0
+                var html = ``
                 for (let h = 0; h < response.length; h++) {
                     var sum_biner = response[h].sum_biner.sum.split(",")
                     
                     var data = []
+                    html +=`<div class="col-md-6">
+                    <h5>`+response[h].name.split('-')[0]+`</h5>
+                    <table width="100%" border="1">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">Project</th>
+                                            <th width="10%">Nilai</th>
+                                            <th width="15%">Rekomendasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`
                     for (let i = 0; i < sum_biner.length; i++) {
                         data.push({
                             "label": "Project "+ parseInt(i+1, 10),
                             "value": sum_biner[i]
                         });
+                        
+                        if(sum_biner[i] > 0 && sum_biner[i] < 20){
+                            recomendation = 'Rekomendasi 1'
+                        }else if(sum_biner[i] > 20 && sum_biner[i] < 30){
+                            recomendation = 'Rekomendasi 2'
+                        }else if(sum_biner[i] > 30 && sum_biner[i] < 40){
+                            recomendation = 'Rekomendasi 3'
+                        }else if(sum_biner[i] > 40 && sum_biner[i] < 50){
+                            recomendation = 'Rekomendasi 4'
+                        }else if(sum_biner[i] > 50 && sum_biner[i] < 60){
+                            recomendation = 'Rekomendasi 5'
+                        }else{
+                            recomendation = 'Rekomendasi 6'
+                        }
+                        
+                        html += `
+                            <tr>
+                                <td>`+ parseInt(i+1, 10) +`</td>
+                                <td>`+ sum_biner[i] +`</td>
+                                <td>`+ recomendation +`</td>
+                            </tr>`
                     }
+                    html += `</td></tr></tbody>
+                        </table></div></br></br>`
                     let allDataTemp = {
                         seriesname: response[h].name.split('-')[0],
                         data: data
@@ -167,6 +253,7 @@
                         dataset: allData
                     }
                 });
+                $("#mergeResult").html(html)
             },
             error: function(response, textStatus, errorThrown) {
                 error(response.responseJSON.data.message)
@@ -183,9 +270,11 @@
         $('#merge-chart').click(function() {
             if( $(this).is(':checked')) {
                 $("#mergeChart").show()
+                $("#mergeChartResult").show()
                 $("#listChart").hide()
             }else {
                 $("#mergeChart").hide()
+                $("#mergeChartResult").hide()
                 $("#listChart").show()
             }
         }); 

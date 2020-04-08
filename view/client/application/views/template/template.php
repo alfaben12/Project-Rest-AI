@@ -22,7 +22,24 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>appassets/assets/css/bamburgh.min.css">
 	<script>
+		if(localStorage.getItem('Project1') == null){
+			window.location = '<?= site_url('logins') ?>';
+		}
+
+		function logout(){
+			localStorage.removeItem('Project1');
+			window.location = '<?= site_url('logins') ?>';
+		}
+
 		var base_url = '<?= config_item('api_endpoint') ?>';
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					"Authorization": "Bearer " + localStorage.getItem('Project1')
+				}
+			});
+		});
+
 	</script>
 </head>
 
@@ -35,70 +52,25 @@
 					<div class="row">
 						<div class="col-md-2">
 							<div class="slick-slider" data-slick='{"slidesToShow":1, "slidesToScroll": 3}'>
-								<?php
-									if($this->uri->segment(1) == 'csv'){
-										?>
-										<div>
-											<a href="<?= site_url('csv/add') ?>"><img src="https://getdrawings.com/free-icon/icon-extension-55.png" style="height: 40px;" class="m-auto img-fluid" alt="Upload CSV"></a>
-										</div>
-										<div>
-											<a href="javascript:void(0)" onclick="alert('Comming soon')"><img src="https://icons-for-free.com/iconfiles/png/512/document+done+list+paper+survey+task+icon-1320161451127008045.png" style="height: 40px;" class="m-auto img-fluid" alt="List CSV"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('reports') ?>"><img src="https://image.flaticon.com/icons/png/512/1055/1055644.png" style="height: 40px;" class="m-auto img-fluid" alt="Laporan"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('dashboards') ?>"><img src="https://cdn0.iconfinder.com/data/icons/ui-flat-line-basic-1/32/Home_Beranda_Menu_UI_Interface-512.png" style="height: 40px;" class="m-auto img-fluid" alt="Dashboard"></a>
-										</div>
-										<?php
-									}else if($this->uri->segment(1) == 'reports'){
-										?>
-										<div>
-											<a href="<?= site_url('reports') ?>"><img src="https://image.flaticon.com/icons/png/512/1055/1055644.png" style="height: 40px;" class="m-auto img-fluid" alt="Laporan"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('dashboards') ?>"><img src="https://cdn0.iconfinder.com/data/icons/ui-flat-line-basic-1/32/Home_Beranda_Menu_UI_Interface-512.png" style="height: 40px;" class="m-auto img-fluid" alt="Dashboard"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('csv/add') ?>"><img src="https://getdrawings.com/free-icon/icon-extension-55.png" style="height: 40px;" class="m-auto img-fluid" alt="Upload CSV"></a>
-										</div>
-										<div>
-											<a href="javascript:void(0)" onclick="alert('Comming soon')"><img src="https://icons-for-free.com/iconfiles/png/512/document+done+list+paper+survey+task+icon-1320161451127008045.png" style="height: 40px;" class="m-auto img-fluid" alt="List CSV"></a>
-										</div>
-										<?php
-									}else if($this->uri->segment(1) == 'dashboards'){
-										?>
-										<div>
-											<a href="<?= site_url('dashboards') ?>"><img src="https://cdn0.iconfinder.com/data/icons/ui-flat-line-basic-1/32/Home_Beranda_Menu_UI_Interface-512.png" style="height: 40px;" class="m-auto img-fluid" alt="Dashboard"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('csv/add') ?>"><img src="https://getdrawings.com/free-icon/icon-extension-55.png" style="height: 40px;" class="m-auto img-fluid" alt="Upload CSV"></a>
-										</div>
-										<div>
-											<a href="javascript:void(0)" onclick="alert('Comming soon')"><img src="https://icons-for-free.com/iconfiles/png/512/document+done+list+paper+survey+task+icon-1320161451127008045.png" style="height: 40px;" class="m-auto img-fluid" alt="List CSV"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('reports') ?>"><img src="https://image.flaticon.com/icons/png/512/1055/1055644.png" style="height: 40px;" class="m-auto img-fluid" alt="Laporan"></a>
-										</div>
-										<?php
-									}else{
-										?>
-										<div>
-											<a href="<?= site_url('dashboards') ?>"><img src="https://cdn0.iconfinder.com/data/icons/ui-flat-line-basic-1/32/Home_Beranda_Menu_UI_Interface-512.png" style="height: 40px;" class="m-auto img-fluid" alt="Dashboard"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('csv/add') ?>"><img src="https://getdrawings.com/free-icon/icon-extension-55.png" style="height: 40px;" class="m-auto img-fluid" alt="Upload CSV"></a>
-										</div>
-										<div>
-											<a href="javascript:void(0)" onclick="alert('Comming soon')"><img src="https://icons-for-free.com/iconfiles/png/512/document+done+list+paper+survey+task+icon-1320161451127008045.png" style="height: 40px;" class="m-auto img-fluid" alt="List CSV"></a>
-										</div>
-										<div>
-											<a href="<?= site_url('reports') ?>"><img src="https://image.flaticon.com/icons/png/512/1055/1055644.png" style="height: 40px;" class="m-auto img-fluid" alt="Laporan"></a>
-										</div>
-										<?php
-									}
-								?>
-                            </div>
+								<div>
+									<a href=""><img src="https://cdn0.iconfinder.com/data/icons/ui-flat-line-basic-1/32/Home_Beranda_Menu_UI_Interface-512.png" style="height: 40px;" class="m-auto img-fluid" alt="Dashboard"></a>
+								</div>
+								<div>
+									<a href="<?= site_url('accounts') ?>"><img src="https://www.freeiconspng.com/uploads/security-icon-png-19.png" style="height: 35px;" class="m-auto img-fluid" alt="Akun"></a>
+								</div>
+								<div>
+									<a href="<?= site_url('csv/add') ?>"><img src="https://getdrawings.com/free-icon/icon-extension-55.png" style="height: 40px;" class="m-auto img-fluid" alt="Upload CSV"></a>
+								</div>
+								<div>
+									<a href="javascript:void(0)" onclick="alert('Comming soon')"><img src="https://icons-for-free.com/iconfiles/png/512/document+done+list+paper+survey+task+icon-1320161451127008045.png" style="height: 40px;" class="m-auto img-fluid" alt="List CSV"></a>
+								</div>
+								<div>
+									<a href="<?= site_url('reports') ?>"><img src="https://image.flaticon.com/icons/png/512/1055/1055644.png" style="height: 40px;" class="m-auto img-fluid" alt="Laporan"></a>
+								</div>
+								<div>
+									<a href="javascript:void(0)" onclick="logout()"><img src="https://image.flaticon.com/icons/png/512/1246/1246273.png" style="height: 35px;" class="m-auto img-fluid" alt="Keluar"></a>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-1">
 						</div>
