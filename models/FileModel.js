@@ -13,7 +13,7 @@ const Model = sequelize.define(
         },
         userid: {
             type: Sequelize.INTEGER,
-            allowNull: true
+            allowNull: false
         },
         parameter: {
             type: Sequelize.TEXT,

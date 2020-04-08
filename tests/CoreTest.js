@@ -8,13 +8,15 @@ const app = require('../index');
 chai.use(chaiHttp);
 chai.should();
 
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImdlbmVyYXRlX2F0IjoiV2VkbmVzZGF5LCBBcHJpbCA4dGggMjAyMCwgMTI6MTY6MjAgcG0iLCJpYXQiOjE1ODYzMjI5ODB9.acAwWz3xwQBCREYPV4w36dKsDbe55W-WwSMMMdRyPTs'
 describe("Cores", () => {
 	describe("GET /cores", () => {
 		// success
 		it("should get a single csv record", (done) => {
-			let uuid = 'b6402d68-b62f-44a1-903a-ab49f7fb5b13' //param
+			let uuid = '4767a820-c5f3-4cff-a4dd-e36c6c6c33dc' //param
 			chai.request(app) // base url
 			.get(`/cores/csv/${uuid}`) //endpoint with param
+			.set("Authorization", "Bearer " + TOKEN) //set the header first
 			.end((err, res) => {
 				// assertion here
 				res.should.have.status(200); 
@@ -27,6 +29,7 @@ describe("Cores", () => {
 			let uuid = 'wrong-param' //param
 			chai.request(app) // base url
 			.get(`/cores/csv/${uuid}`) //endpoint with param
+			.set("Authorization", "Bearer " + TOKEN) //set the header first
 			.end((err, res) => {
 				// assertion here
 				res.should.have.status(404); 

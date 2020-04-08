@@ -4,24 +4,27 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'sum_biner',
+    'user',
     {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        userid: {
-            type: Sequelize.INTEGER,
+        name: {
+            type: Sequelize.STRING(255),
             allowNull: false
         },
-        parameter: {
-            type: Sequelize.TEXT,
-            primaryKey: true,
+        username: {
+            type: Sequelize.STRING(255),
             allowNull: false
         },
-        sum: {
+        password: {
             type: Sequelize.TEXT,
+            allowNull: false
+        },
+        email: {
+            type: Sequelize.STRING(255),
             allowNull: false
         },
         createdAt: {

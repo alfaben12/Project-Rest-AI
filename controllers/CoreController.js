@@ -24,6 +24,8 @@ module.exports = {
 	
 	readCSV: async (req, res) => {
 		let result = []
+		let userid = req.payload.userid
+		
 		let code = 200
 		if(req.file == undefined){
 			let code = 403
@@ -67,6 +69,7 @@ module.exports = {
 						
 						let single_data = {
 							parameter: parameter,
+							userid: userid,
 							name: restructured_all[i][1],
 							biner: row_biner.toString(),
 						}
@@ -86,6 +89,7 @@ module.exports = {
 					await ExportsModel.KeyBiner.bulkCreate(data_insert)
 					await ExportsModel.SumBiner.create({
 						parameter: parameter,
+						userid: userid,
 						sum: restructured_biner_sum.toString()
 					})
 					
@@ -99,6 +103,8 @@ module.exports = {
 	
 	readMultipleCSV: async (req, res) => {
 		let result = []
+		let userid = req.payload.userid
+		
 		let code = 200
 		code = 200
 		let files = req.files
@@ -151,6 +157,7 @@ module.exports = {
 					let row_biner = restructured_all[i].slice(2)
 					await ExportsModel.KeyBiner.create({ // await fix async bug
 						parameter: parameter_temp,
+						userid: userid,
 						name: restructured_all[i][1],
 						biner: row_biner.toString(),
 					})
@@ -158,11 +165,13 @@ module.exports = {
 				
 				await ExportsModel.SumBiner.create({
 					parameter: parameter_temp,
+					userid: userid,
 					sum: restructured_biner_sum.toString()
 				})
 				
 				await ExportsModel.File.create({
 					parameter: parameter_temp,
+					userid: userid,
 					name: filename
 				})
 			})
@@ -176,9 +185,11 @@ module.exports = {
 	
 	getDataCsv: async (req, res) => {
 		let parameter = req.params.uuid.split(",")
+		let userid = req.payload.userid
 		
 		ExportsModel.File.findAll({
 			where: {
+				userid: userid,
 				parameter: parameter
 			},
 			include: [{

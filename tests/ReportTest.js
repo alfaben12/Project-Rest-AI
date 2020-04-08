@@ -7,6 +7,7 @@ const app = require('../index');
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImdlbmVyYXRlX2F0IjoiV2VkbmVzZGF5LCBBcHJpbCA4dGggMjAyMCwgMTI6MTY6MjAgcG0iLCJpYXQiOjE1ODYzMjI5ODB9.acAwWz3xwQBCREYPV4w36dKsDbe55W-WwSMMMdRyPTs'
 
 describe("Reports", () => {
 	describe("GET /reports", () => {
@@ -14,6 +15,7 @@ describe("Reports", () => {
 		it("should get all csv record", (done) => {
 			chai.request(app) // base url
 			.get(`/reports`) //endpoint with param
+			.set("Authorization", "Bearer " + TOKEN) //set the header first
 			.end((err, res) => {
 				// assertion here
 				res.should.have.status(200); 
@@ -27,6 +29,7 @@ describe("Reports", () => {
             let end = '2020-04-30'
 			chai.request(app) // base url
 			.get(`/reports/date_range?start=${start}&end=${end}`) //endpoint with param
+			.set("Authorization", "Bearer " + TOKEN) //set the header first
 			.end((err, res) => {
 				// assertion here
 				res.should.have.status(200); 
@@ -40,6 +43,7 @@ describe("Reports", () => {
             let end = '2010-04-30'
 			chai.request(app) // base url
 			.get(`/reports/date_range?start=${start}&end=${end}`) //endpoint with param
+			.set("Authorization", "Bearer " + TOKEN) //set the header first
 			.end((err, res) => {
 				// assertion here
 				res.should.have.status(404); 
