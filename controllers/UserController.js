@@ -37,12 +37,12 @@ module.exports = {
 			return res.status(400).json('Terjadi kesalahan');
 		});
 	},
-	create: async function(req, res){
+	create: function(req, res){
 		let name = req.body.name
 		let username = req.body.username
-        let password = bcrypt.hashSync(req.body.password, 10);
+		let password = bcrypt.hashSync(req.body.password, 10);
 		let email = req.body.email
-
+		
 		ExportsModel.User.findOne({
 			where: {
 				[Op.or]: [{username: username}, {email: email}]
@@ -69,5 +69,45 @@ module.exports = {
 		}).error(function (errValiation) {
 			return res.status(400).json('Terjadi kesalahan');
 		});
-	} 
+	},
+	update: function(req, res){
+		let userid = req.payload.userid
+		
+		let name = req.body.name
+		let password = bcrypt.hashSync(req.body.password, 10);
+		
+		ExportsModel.User.update({
+			name: name,
+			password: password
+		},{
+			where: {
+				id: userid
+			}
+		}).then(data => {
+			if(data){
+				return res.status(200).json('Berhasil memperbarui')
+			}else{
+				return res.status(404).json('Gagal melakukan pendaftaran')
+			}
+		}).error(function (err) {
+			return res.status(400).json('Terjadi kesalahan');
+		})
+	},
+	getByJWT: function(req, res){
+		let userid = req.payload.userid
+		
+		ExportsModel.User.findOne({
+			where: {
+				id: userid
+			}
+		}).then(data => {
+			if(data){
+				return res.status(200).json(data)
+			}else{
+				return res.status(404).json('Gagal melakukan pendaftaran')
+			}
+		}).error(function (err) {
+			return res.status(400).json('Terjadi kesalahan');
+		});
+	}
 };
