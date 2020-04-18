@@ -22,13 +22,6 @@
 	<script type="text/javascript" src="<?= base_url() ?>appassets/assets/js/demo/jquery-confirm/jquery-confirm.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>appassets/assets/css/bamburgh.min.css">
-    <script>
-        if('<?= $this->uri->segment(1) ?>' == 'logins' || '<?= $this->uri->segment(1) ?>' == ''){
-			if(localStorage.getItem('posJwtTokenOwner') != null){
-				window.location = '<?= site_url('cashiers') ?>';
-			}
-        }
-    </script>
 </head>
 
 <body id="app-top">

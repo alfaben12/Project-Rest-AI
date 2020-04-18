@@ -22,7 +22,7 @@ module.exports = {
 				} else {
 					passwordCompare = false;
 				}
-				
+				console.log(passwordCompare)
 				if (!passwordCompare) {
 					return res.status(400).json('Password atau username salah');
 				}

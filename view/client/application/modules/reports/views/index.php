@@ -95,7 +95,7 @@
                         lengthMenu: [ [ 5, 10, 15, -1 ], [ 5, 10, 15, 'All' ] ],
                         dom:
                             '<"row"<"col-md-6 d-flex align-items-center"B><"col-md-6 d-flex align-items-center" f><"col-md-12"<"divider"> i>><t><"table-footer-wrapper" <"divider"> <"row"<"col-md-6 d-flex align-items-center" l><"col-md-6 d-flex align-items-center" p>>>',
-                        buttons: [ 'copy', 'csv', 'excel', 'pdf' ],
+                        buttons: ['pdf' ],
                         columnDefs: [ { targets: 'no-sort', orderable: !1 } ]
                     });
                 },
@@ -158,7 +158,7 @@
                     lengthMenu: [ [ 5, 10, 15, -1 ], [ 5, 10, 15, 'All' ] ],
                     dom:
                         '<"row"<"col-md-6 d-flex align-items-center"B><"col-md-6 d-flex align-items-center" f><"col-md-12"<"divider"> i>><t><"table-footer-wrapper" <"divider"> <"row"<"col-md-6 d-flex align-items-center" l><"col-md-6 d-flex align-items-center" p>>>',
-                    buttons: [ 'copy', 'csv', 'excel', 'pdf' ],
+                    buttons: [ 'pdf' ],
                     columnDefs: [ { targets: 'no-sort', orderable: !1 } ]
                 });
 
